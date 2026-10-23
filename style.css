@@ -1,0 +1,180 @@
+
+/* Matheus Ribeiro Magalhães: layout profissional */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #7390DB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+}
+
+/* Maria Clara Sena: alteração do fundo para #9373DB */
+.container {
+    background: #9373DB;
+    width: 100%;
+    max-width: 520px;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Matheus Ribeiro Magalhães: cabeçalho */
+.cabecalho {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+h1 {
+    font-size: 26px;
+    line-height: 1.3;
+}
+
+.cabecalho p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.formulario,
+.area-resultado {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+h2 {
+    font-size: 16px;
+    color: #30264a;
+    margin: 0 0 18px;
+}
+
+.formulario h2:not(:first-child) {
+    margin-top: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #353044;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6d1e2;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #9373DB;
+    box-shadow: 0 0 0 3px rgba(147, 115, 219, 0.2);
+}
+
+/* Matheus Ribeiro Magalhães:
+   quatro notas organizadas em duas colunas */
+.grupo-notas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.grupo-notas > div {
+    min-width: 0;
+}
+
+/* Evelyn Jasmine: botão na cor lilás */
+/* Markus André: animações ao passar o mouse e clicar */
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: #C8A2C8;
+    color: #251533;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+/* Markus André: animação ao passar o mouse */
+button:hover {
+    background: #B98AB9;
+    transform: scale(1.04);
+}
+
+/* Markus André: animação ao clicar */
+button:active {
+    background: #A875A8;
+    transform: scale(0.95);
+}
+
+button:focus-visible {
+    outline: 2px solid #30264a;
+    outline-offset: 3px;
+}
+
+/* Matheus Ribeiro Magalhães: área de resultado */
+.area-resultado {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#resultado {
+    margin: 0;
+    color: #44365e;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+footer {
+    margin-top: 22px;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Matheus Ribeiro Magalhães: adaptação para celulares */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    .grupo-notas {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+}
