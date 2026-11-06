@@ -1,61 +1,77 @@
+// Função que calcula a média e mostra o resultado
+function calcularMedia() {
 
-// Vinicius Marcelo Alencar Moraes:
-// Média mínima para aprovação alterada para 7.
+  // Captura os valores digitados
+  let nome = document.getElementById("nome").value.trim();
+  let nota1 = document.getElementById("nota1").value;
+  let nota2 = document.getElementById("nota2").value;
+  let nota3 = document.getElementById("nota3").value;
 
-// Wemerson Gustavo:
-// Três mensagens de resultado utilizando if, else if e else.
 
-const botao = document.getElementById("btn-calcular");
+// Conferir: algum campo vazio?
 
-botao.addEventListener("click", function () {
+  if (nome === "" || nota1 === "" || nota2 === "" || nota3 === "") {
+  document.getElementById("resultado").innerText = "Preencha o nome e as três notas!";
+  document.getElementById("resultado").className = "erro"
+  return;
+  }
 
-    const nome = document.getElementById("nome").value.trim();
-    const resultado = document.getElementById("resultado");
+// Conferir: o nome tem algum número?
+if (/[0-9]/.test(nome)) {
+  document.getElementById("resultado").innerText = "O nome não pode ter números!";
+  document.getElementById("resultado").className = "erro"
+  return;
+  }
 
-    // Matheus Ribeiro Magalhães:
-    // inclusão da Nota 4 no sistema.
-    const campos = ["nota1", "nota2", "nota3", "nota4"].map(
-        id => document.getElementById(id).value
-    );
+// Agora sim, transformar as notas em número
+nota1 = Number(nota1);
+nota2 = Number(nota2);
+nota3 = Number(nota3);
 
-    // Verifica se todos os campos foram preenchidos
-    if (!nome || campos.some(valor => valor.trim() === "")) {
-        resultado.textContent = "Preencha todos os campos.";
-        return;
+// Conferir: alguma nota fora de 0 a 10?
+if (nota1 < 0 || nota1 > 10 || 
+    nota2 < 0 || nota2 > 10 ||
+    nota3 < 0 || nota3 > 10) {
+    document.getElementById("resultado").innerText = "Escolha um número de 0 a 10!"
+    return;
     }
 
-    const notas = campos.map(Number);
+  console.log("Nome:", nome);
+  console.log("Nota 1:", nota1);
+  console.log("Nota 2:", nota2);
+  console.log("Nota 3:", nota3);
 
-    // Verifica se todas as notas estão entre 0 e 10
-    if (notas.some(nota =>
-        !Number.isFinite(nota) || nota < 0 || nota > 10
-    )) {
-        resultado.textContent = "Digite notas entre 0 e 10.";
-        return;
-    }
+  // Calcula a média das 3 notas
+  let media = (nota1 + nota2 + nota3) / 3;
 
-    // Matheus Ribeiro Magalhães:
-    // cálculo da média com as quatro avaliações.
-    const media = (
-        notas[0] + notas[1] + notas[2] + notas[3]
-    ) / 4;
+  console.log("Média calculada:", media);
 
-    let situacao;
+  // Define a situação do aluno usando if/else
+  let situacao;
 
-    // Wemerson Gustavo:
-    // inclusão de três opções de resultado.
-    if (media > 7) {
-        situacao = "Parabéns, você passou!";
+  if (media >= 7) {
+    situacao = "Aprovado";
+    document.getElementById("resultado").className = "aprovado"
+  }
+  else if (media >= 5 && media <= 6.9) {
+    situacao = "Recuperação";
+    document.getElementById("resultado").className = "recuperacao"
+  }
+  else { 
+    situacao = "Reprovado";
+    document.getElementById("resultado").className = "reprovado"
+  }
+  console.log("Situação:", situacao);
 
-    } else if (Math.abs(media - 7) < 1e-9) {
-        situacao = "Você passou na média. Parabéns!";
+  // Passo 1: arredonda a média para 1 casa decimal
+  let mediaArredondada = media.toFixed(1);
 
-    } else {
-        situacao = "Infelizmente, você não alcançou a média.";
-    }
+  // Passo 2: monta o texto que vai aparecer na tela
+  let texto = nome + " — Média: " + mediaArredondada
+    + " (" + situacao + ")";
 
-    // Exibição do resultado
-    resultado.textContent =
-        `${nome} - Média: ${media.toFixed(1)} - ${situacao}`;
-
-});
+  // Passo 3: mostra o texto na tela
+  document.getElementById("resultado").innerText = texto;
+}
+// Quando o botão for clicado, chama a função acima
+document.getElementById("btn-calcular").addEventListener("click", calcularMedia);
